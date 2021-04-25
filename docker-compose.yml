@@ -1,0 +1,30 @@
+version: '3'
+services:
+  mqtt:
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile
+    user: 1000:1000
+    volumes:
+      - .:/var/www/html
+
+  database:
+    image: mysql:5.7
+    ports:
+      - 3307:3306
+    volumes:
+      - ./.docker/mysql/data:/var/lib/mysql_databases
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "mqtt-uranus"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      PMA_USER: "root"
+      PMA_PASSWORD: "root"
+    ports:
+      - "9001:80"
