@@ -15,12 +15,12 @@ class Mqtt extends Migration
     {
         Schema::create('mqtt', function (Blueprint $table) {
             $table->id();
-            $table->date('day');
-            $table->double('temperature');
-            $table->double('moisture');
-            $table->double('wind_velocity');
-            $table->integer('wind_direction');
-            $table->timestamp('creation_at');
+            $table->string('temperature');
+            $table->string('pluviometter');
+            $table->string('moisture');
+            $table->string('wind_velocity');
+            $table->string('wind_direction');
+            $table->timestamps();
         });
     }
 

@@ -11,9 +11,7 @@ class Mqtt extends Model
 
     protected string $connection = 'mysql';
 
-    protected string $dateFormat = 'U';
-
     protected string $table = 'mqtt';
 
-    protected array $fillable = ['day', 'temperature', 'moisture', 'pluviometter', 'wind_direction', 'wind_velocity'];
+    protected array $fillable = ['temperature', 'moisture', 'pluviometter', 'wind_direction', 'wind_velocity'];
 }

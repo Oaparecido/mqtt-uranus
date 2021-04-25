@@ -32,8 +32,10 @@ class MqttService
     public function __construct()
     {
         $this->mqtt = new MqttClient($this->host, $this->port);
-        $this->mqtt->connect(null, true);
-//        $this->subscribe();
+        $connectionSettings = (new \PhpMqtt\Client\ConnectionSettings)
+            ->setConnectTimeout(10);
+
+        $this->mqtt->connect($connectionSettings, true);
     }
 
     public function getTemperature(): string
