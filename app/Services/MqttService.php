@@ -17,8 +17,12 @@ class MqttService
         'velocity' => 'shintaro/2513/vento/velocidade',
         'direction' => 'shintaro/2513/vento/direcao',
     ];
-
     private MqttClient $mqtt;
+    private string $temperature;
+    private string $moisture;
+    private string $pluviometter;
+    private string $velocity;
+    private string $direction;
 
     /**
      * @throws \PhpMqtt\Client\Exceptions\ProtocolNotSupportedException
@@ -28,17 +32,67 @@ class MqttService
     public function __construct()
     {
         $this->mqtt = new MqttClient($this->host, $this->port);
-        $this->mqtt->interrupt();
-        $this->mqtt->connect();
+        $this->mqtt->connect(null, true);
+//        $this->subscribe();
     }
 
-    public function getTemperature()
+    public function getTemperature(): string
     {
         $this->mqtt->subscribe($this->topics['temperature'], function ($topic, $message) {
-            return $message;
+            $this->temperature = $message;
+            $this->mqtt->interrupt();
         }, 0);
-
         $this->mqtt->loop(true);
         $this->mqtt->disconnect();
+
+        return $this->temperature;
+    }
+
+    public function getMoisture(): string
+    {
+        $this->mqtt->subscribe($this->topics['moisture'], function ($topic, $message) {
+            $this->moisture = $message;
+            $this->mqtt->interrupt();
+        }, 0);
+        $this->mqtt->loop(true);
+        $this->mqtt->disconnect();
+
+        return $this->moisture;
+    }
+
+    public function getPluviometter(): string
+    {
+        $this->mqtt->subscribe($this->topics['pluviometter'], function ($topic, $message) {
+            $this->pluviometter = $message;
+            $this->mqtt->interrupt();
+        }, 0);
+        $this->mqtt->loop(true);
+        $this->mqtt->disconnect();
+
+        return $this->pluviometter;
+    }
+
+    public function getVelocity(): string
+    {
+        $this->mqtt->subscribe($this->topics['velocity'], function ($topic, $message) {
+            $this->velocity = $message;
+            $this->mqtt->interrupt();
+        }, 0);
+        $this->mqtt->loop(true);
+        $this->mqtt->disconnect();
+
+        return $this->velocity;
+    }
+
+    public function getDirection(): string
+    {
+        $this->mqtt->subscribe($this->topics['direction'], function ($topic, $message) {
+            $this->direction = $message;
+            $this->mqtt->interrupt();
+        }, 0);
+        $this->mqtt->loop(true);
+        $this->mqtt->disconnect();
+
+        return $this->direction;
     }
 }
