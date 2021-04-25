@@ -13,7 +13,7 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - ./.docker/mysql/data:/var/lib/mysql_databases
+      - ./.docker/mysql/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "mqtt-uranus"
