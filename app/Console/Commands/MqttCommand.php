@@ -85,7 +85,8 @@ class MqttCommand extends Command
             $this->error(Carbon::now() . ' >>>> Code: ' . $e->getCode());
         }
 
-        $this->line((Carbon::now) . '---------------------------');
+        $this->line(Carbon::now() . ' ---------------------------');
         $this->line(Carbon::now() . ' >>>> - End command - <<<< ');
+        $this->line(Carbon::now() . ' ---------------------------');
     }
 }
