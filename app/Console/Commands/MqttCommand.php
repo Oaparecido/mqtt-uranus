@@ -56,7 +56,15 @@ class MqttCommand extends Command
             'wind_direction' => (new MqttService())->getDirection(),
         ]);
 
-        $model = new Mqtt();
+        try {
+            DB::transaction(function () use ($request) {
+                DB::table('mqtt')->insert([
+                    'temperature' => $request->get('temperature'),
+                    'pluviometter' => $request->get('pluviometter'),
+                    'moisture' => $request->get('moisture'),
+                    'wind_velocity' => $request->get('wind_velocity'),
+                    'wind_direction' => $request->get('wind_direction'),
+                ]);
 
         DB::transaction(function () use ($request, $model) {
             $model->fill($request->input());
