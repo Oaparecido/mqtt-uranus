@@ -20,7 +20,7 @@ class Mqtt extends Migration
             $table->string('moisture');
             $table->string('wind_velocity');
             $table->string('wind_direction');
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 
