@@ -71,10 +71,19 @@ class MqttCommand extends Command
                     ->orderBy('id', 'desc')
                     ->first();
 
-            $model->save();
-            
-            $this->line(Carbon::now() . ' >>>> Success: ' . $model->id);
-        });
+                $this->info(Carbon::now() . ' >>>> Success!');
+                $this->info(Carbon::now() . ' >>>> ID: ' . $mqtt->id);
+                $this->info(Carbon::now() . ' >>>> Temperature: ' . $mqtt->temperature);
+                $this->info(Carbon::now() . ' >>>> Pluviometter: ' . $mqtt->pluviometter);
+                $this->info(Carbon::now() . ' >>>> Moisture: ' . $mqtt->moisture);
+                $this->info(Carbon::now() . ' >>>> Wind_velocity: ' . $mqtt->wind_velocity);
+                $this->info(Carbon::now() . ' >>>> Wind_direction: ' . $mqtt->wind_direction);
+            });
+        } catch (\Exception $e) {
+            $this->error(Carbon::now() . ' >>>> Error occurred <<<< ');
+            $this->error(Carbon::now() . ' >>>> Message: ' . $e->getMessage());
+            $this->error(Carbon::now() . ' >>>> Code: ' . $e->getCode());
+        }
 
         $this->line((Carbon::now) . '---------------------------');
         $this->line(Carbon::now() . ' >>>> - End command - <<<< ');
