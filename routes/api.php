@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\MqttController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/mqtt', [MqttController::class, 'index'])->name('index:last.saved.data');
+
+Route::get('/mqtt/{date}', [MqttController::class, 'byDate'])->name('show:by.date');
