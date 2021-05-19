@@ -8,6 +8,9 @@
         <testsuite name="mqtt-data">
             <file>./tests/Services/Mqtt/TemperatureTest.php</file>
         </testsuite>
+        <testsuite name="mqtt-factory">
+            <file>./tests/Services/Mqtt/GenerateTest.php</file>
+        </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>

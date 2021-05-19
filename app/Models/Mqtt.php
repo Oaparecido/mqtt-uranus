@@ -9,9 +9,11 @@ class Mqtt extends Model
 {
     use HasFactory;
 
-    protected string $connection = 'mysql';
+    protected $connection = 'mysql';
 
-    protected string $table = 'mqtt';
+    protected $table = 'mqtt';
 
-    protected array $fillable = ['temperature', 'moisture', 'pluviometter', 'wind_direction', 'wind_velocity'];
+    public $timestamps = false;
+
+    protected $fillable = ['temperature', 'moisture', 'pluviometter', 'wind_direction', 'wind_velocity'];
 }
