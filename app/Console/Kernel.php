@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command(MqttCommand::class)
-            ->hourly()
+//            ->hourly()
             ->timezone('America/Sao_Paulo')
             ->between('6:00', '22:00');
     }

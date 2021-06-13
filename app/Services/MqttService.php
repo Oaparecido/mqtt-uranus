@@ -12,7 +12,7 @@ class MqttService
     private int $port = 1883;
     private array $topics = [
         'temperature' => 'shintaro/2513/dht22/temperatura',
-        'moisture' => 'shintaro/2513/dht22/humidade',
+        'moisture' => 'shintaro/2513/dht22/umidade',
         'pluviometter' => 'shintaro/2513/pluviometter/value',
         'velocity' => 'shintaro/2513/vento/velocidade',
         'direction' => 'shintaro/2513/vento/direcao',
@@ -33,7 +33,7 @@ class MqttService
     {
         $this->mqtt = new MqttClient($this->host, $this->port);
         $connectionSettings = (new \PhpMqtt\Client\ConnectionSettings)
-            ->setConnectTimeout(10);
+            ->setConnectTimeout(100);
 
         $this->mqtt->connect($connectionSettings, true);
     }
